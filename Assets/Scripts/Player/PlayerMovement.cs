@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Scripts References")]
-    [SerializeField] private PlayerSO playerData;
+    [SerializeField] private EntitySO entityData;
     [SerializeField] private PlayerRotation playerRotation;
     
     [SerializeField] private LayerMask jumpLayer; 
@@ -51,14 +51,14 @@ public class PlayerMovement : MonoBehaviour
             playerRotation.FlipPlayer(_horizontalMovement);
         }
         
-        Vector2 speed = new Vector2(_horizontalMovement * (playerData.MovementSpeed), _rigidbody2D.velocity.y);
+        Vector2 speed = new Vector2(_horizontalMovement * (entityData.MovementSpeed), _rigidbody2D.velocity.y);
         _rigidbody2D.velocity = speed;
     }
 
     private void Jump()
     {
         // AudioManager.Instance.PlayEffect("Jump");
-        _rigidbody2D.AddForce(Vector2.up * playerData.JumpForce, ForceMode2D.Impulse);
+        _rigidbody2D.AddForce(Vector2.up * entityData.JumpForce, ForceMode2D.Impulse);
     }
 
     private void CheckGrounded()
