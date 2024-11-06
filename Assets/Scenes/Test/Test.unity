@@ -171,13 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5189a39bd223f4e9ac540a391074d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 4d3ebcd62aecc424e863517952db0ffd, type: 2}
+  entityData: {fileID: 11400000, guid: 4d3ebcd62aecc424e863517952db0ffd, type: 2}
   playerRotation: {fileID: 756333098}
   jumpLayer:
     serializedVersion: 2
     m_Bits: 256
   feetPosition: {fileID: 2126163306}
-  sphereRadius: 0.5
+  collisionBoxSize: {x: 1, y: 0.3}
+  jumpDelayTime: 0.7
 --- !u!50 &67421117
 Rigidbody2D:
   serializedVersion: 4
@@ -503,7 +504,7 @@ GameObject:
   - component: {fileID: 756333097}
   - component: {fileID: 756333098}
   m_Layer: 0
-  m_Name: Player Body (rota)
+  m_Name: Player Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

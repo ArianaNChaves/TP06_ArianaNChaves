@@ -11,11 +11,9 @@ public class Health : MonoBehaviour, IHealthHandler
     [SerializeField] private EntitySO entityData;
     
     private int _health;
-    private int _maxHealth;
     private void Start()
     {
-        _maxHealth = entityData.MaxHealth;
-        _health = _maxHealth;
+        _health = entityData.MaxHealth;
         UpdateHealthBar();
     }
     
@@ -26,17 +24,17 @@ public class Health : MonoBehaviour, IHealthHandler
         {
             Die();
         }
-        if (_health > _maxHealth)
+        if (_health > entityData.MaxHealth)
         {
-            _health = _maxHealth;
+            _health = entityData.MaxHealth;
         }
 
         UpdateHealthBar();
     }
     private void UpdateHealthBar()
     {
-        float clampedHealth = Mathf.Clamp(_health, 0, _maxHealth);
-        healthBar.fillAmount = clampedHealth / _maxHealth;
+        float clampedHealth = Mathf.Clamp(_health, 0, entityData.MaxHealth);
+        healthBar.fillAmount = clampedHealth / entityData.MaxHealth;
     }
     private void Die()
     {

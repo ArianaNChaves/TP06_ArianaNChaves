@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 8
   jumpForce: 7
+  startJumpsAmount: 1
   maxHealth: 100
   damage: 20
-  fireRate: 1
-  velocity: 15
-  lifeTime: 0.7

@@ -7,6 +7,7 @@ public class EntitySO : ScriptableObject
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private int startJumpsAmount;
 
 
     [Header("Health Settings")]
@@ -18,5 +19,6 @@ public class EntitySO : ScriptableObject
     public int Damage{get => damage; set => damage = value; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public int StartJumpsAmount { get => startJumpsAmount; set => startJumpsAmount = value; }
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
 }
