@@ -9,7 +9,6 @@ public class EntitySO : ScriptableObject
     [SerializeField] private float jumpForce;
     [SerializeField] private int startJumpsAmount;
 
-
     [Header("Health Settings")]
     [SerializeField] private int maxHealth;
 

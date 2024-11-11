@@ -53,10 +53,19 @@ public class Health : MonoBehaviour, IHealthHandler
         // Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(gameObject,0.01f);
     }
-    
-    public bool CanReceiveDamage
+
+    private IEnumerator Invulnerability(float invulnerabilityTime)
     {
-        get => _canReceiveDamage;
-        set => _canReceiveDamage = value;
+        _canReceiveDamage = false;
+        
+        yield return new WaitForSeconds(invulnerabilityTime);  
+        
+        _canReceiveDamage = true;
+        
+    }
+    
+    public void ActivateInvulnerability(float invulnerabilityTime)
+    {
+        StartCoroutine(Invulnerability(invulnerabilityTime));
     }
 }

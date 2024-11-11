@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    
     private void JumpHandler()
     {
         JumpDelay();
@@ -111,16 +112,9 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(feetPosition.position, collisionBoxSize);
     }
-
-    public int GetMaxJumps()
+    
+    public void AddMaxJumps()
     {
-        return _maxJumps;
+        this._maxJumps++;
     }
-
-    public void SetMaxJumps(int value)
-    {
-        this._maxJumps = value;
-    }
-   
-   
 }

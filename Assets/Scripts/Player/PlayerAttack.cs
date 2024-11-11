@@ -11,25 +11,27 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float hitRadius;
 
     private float _timer;
+    private int _increasedDamage = 0;
+    
     private void Update()
     {
         _timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= entityData.AttackRate)
         {
-            Attack(this.entityData.Damage);
-            Debug.Log("Attack");
+            int damage = entityData.Damage + _increasedDamage;
+            Attack(damage);
+            Debug.Log($"Attack Damage: {damage}");
             _timer = 0;
         }
     }
-
-
+    
     private void Attack(int damage)
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(hitPoint.position, hitRadius);
         foreach (var obj in colliders)
         {
             if (obj.gameObject == this.gameObject) continue;
-            if(!CompareLayerAndMask(obj.gameObject.layer, damageableLayer)) continue;
+            if(!Utilities.CompareLayerAndMask(obj.gameObject.layer, damageableLayer)) continue;
             
             IHealthHandler healthHandler = obj.gameObject.GetComponent<IHealthHandler>();
             if (healthHandler == null) return;
@@ -43,9 +45,9 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hitPoint.position, hitRadius);
     }
-
-    private bool CompareLayerAndMask(LayerMask mask, int layer)
+    public int IncreasedDamage
     {
-        return mask == (mask | (1 << layer));
+        get => _increasedDamage;
+        set => _increasedDamage = value;
     }
 }
