@@ -104,5 +104,8 @@ public class Interactable : MonoBehaviour
     private void AddCoins(GameObject obj)
     {
         Debug.Log("MAS GUITA PA"); 
+        
+        Destroy(this.gameObject);
+
     }
 }
