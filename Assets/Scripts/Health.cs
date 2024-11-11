@@ -11,6 +11,8 @@ public class Health : MonoBehaviour, IHealthHandler
     [SerializeField] private EntitySO entityData;
     
     private int _health;
+    private bool _canReceiveDamage = true;
+    
     private void Start()
     {
         _health = entityData.MaxHealth;
@@ -19,7 +21,15 @@ public class Health : MonoBehaviour, IHealthHandler
     
     public void UpdateHealth(int amount)
     {
-        _health += amount;
+        int value = amount;
+        if (amount < 0 && !_canReceiveDamage)
+        {
+            value = 0;
+            Debug.Log("NO PUEDE RECIBIR DANIO PERRA ~ Health.cs/UpdateHealth");
+        }
+            
+        _health += value;
+        
         if (_health <= 0)
         {
             Die();
@@ -31,14 +41,22 @@ public class Health : MonoBehaviour, IHealthHandler
 
         UpdateHealthBar();
     }
+    
     private void UpdateHealthBar()
     {
         float clampedHealth = Mathf.Clamp(_health, 0, entityData.MaxHealth);
         healthBar.fillAmount = clampedHealth / entityData.MaxHealth;
     }
+    
     private void Die()
     {
         // Instantiate(particles, transform.position, Quaternion.identity);
         Destroy(gameObject,0.01f);
+    }
+    
+    public bool CanReceiveDamage
+    {
+        get => _canReceiveDamage;
+        set => _canReceiveDamage = value;
     }
 }

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbef8f8d04a1c5d429eb49f23098484a, type: 3}
-  m_Name: Player Data
+  m_Name: Enemy Data
   m_EditorClassIdentifier: 
-  movementSpeed: 8
-  jumpForce: 7
-  startJumpsAmount: 1
+  movementSpeed: 5
+  jumpForce: 2
+  startJumpsAmount: 0
   maxHealth: 100
-  damage: 20
-  attackRate: 1
+  damage: 25
