@@ -7,12 +7,14 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Scripts References")]
     [SerializeField] private EntitySO entityData;
-    [SerializeField] private PlayerRotation playerRotation;
+    // [SerializeField] private PlayerRotation playerRotation;
     
     [SerializeField] private LayerMask jumpLayer; 
     [SerializeField] private Transform feetPosition;
     [SerializeField] private Vector2 collisionBoxSize;
     [SerializeField] private float jumpDelayTime = 0.7f;
+
+    [SerializeField] private Transform body;
 
     private Rigidbody2D _rigidbody2D;
     private int _maxJumps;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private const float AirSpeedModifier = 0.5f;
     private float _jumpTimer = 0;
     private bool _isFalling = false;
+    private bool _isFacingRight = true;
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -48,11 +51,14 @@ public class PlayerMovement : MonoBehaviour
         
         if (_horizontalMovement > 0)
         {
-            playerRotation.FlipPlayer(_horizontalMovement);
+            // playerRotation.FlipPlayer(_horizontalMovement);
+            Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
         }
         else if (_horizontalMovement < 0)
         {
-            playerRotation.FlipPlayer(_horizontalMovement);
+            // playerRotation.FlipPlayer(_horizontalMovement);
+            Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
+
         }
         
         Vector2 speed = new Vector2(_horizontalMovement * (entityData.MovementSpeed), _rigidbody2D.velocity.y);
