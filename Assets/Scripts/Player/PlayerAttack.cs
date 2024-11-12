@@ -20,7 +20,6 @@ public class PlayerAttack : MonoBehaviour
         {
             int damage = entityData.Damage + _increasedDamage;
             Attack(damage);
-            Debug.Log($"Attack Damage: {damage}");
             _timer = 0;
         }
     }

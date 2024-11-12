@@ -15,9 +15,4 @@ public static class Utilities
         facingRight = !facingRight;
         objTransform.Rotate(new Vector3(0, 180, 0));
     }
-    public static void RotateObject(ref bool facingRight, ref Transform objTransform)
-    {
-        facingRight = !facingRight;
-        objTransform.Rotate(new Vector3(0, 180, 0));
-    }
 }
