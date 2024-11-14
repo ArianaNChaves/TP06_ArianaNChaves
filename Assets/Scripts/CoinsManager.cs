@@ -41,6 +41,12 @@ public class CoinsManager : MonoBehaviour
         return _coinsAmount;
     }
 
+    public void ExpendCoins(int amount)
+    {
+        _coinsAmount -= amount;
+        GameplayUi.Instance.UpdateCoinsText(_coinsAmount);
+    }
+
     public void SpawnCoin(Vector3 position, Quaternion rotation)
     {
         Instantiate(coinPrefab, position, rotation);

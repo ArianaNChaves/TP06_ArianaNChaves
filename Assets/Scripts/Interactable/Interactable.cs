@@ -19,10 +19,8 @@ public class Interactable : MonoBehaviour
     
     [SerializeField] private Type type;
     [SerializeField] private InteractableSO interactableData;
+    [SerializeField] private GameSettingsSO gameSettingsData;
     
-    private const int MinCoinsAmount = 2;
-    private const int MaxCoinsAmount = 5;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
@@ -124,8 +122,7 @@ public class Interactable : MonoBehaviour
 
     private void AddCoins()
     {
-        Debug.Log("MAS GUITA PA");
-        int currentCoinsAmount = Random.Range(MinCoinsAmount, MaxCoinsAmount + 1);
+        int currentCoinsAmount = Random.Range((int)gameSettingsData.CoinValueRange.x, (int)gameSettingsData.CoinValueRange.y + 1);
         CoinsManager.Instance.AddCoins(currentCoinsAmount);
         Destroy(this.gameObject);
 

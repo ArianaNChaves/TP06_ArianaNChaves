@@ -122,4 +122,9 @@ public class PlayerMovement : MonoBehaviour
         this._maxJumps++;
         GameplayUi.Instance.UpdateJumpsText(_maxJumps);
     }
+
+    public int GetMaxJumps()
+    {
+        return this._maxJumps;
+    }
 }

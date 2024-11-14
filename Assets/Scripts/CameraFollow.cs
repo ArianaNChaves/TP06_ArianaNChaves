@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private float speed = 2.0f;
-    [SerializeField] private float yOffset = 1.0f;
+    [SerializeField] private GameSettingsSO gameSettingsData;
 
     private Vector3 _lastPosition;
 
@@ -28,8 +28,8 @@ public class CameraFollow : MonoBehaviour
             transform.position = _lastPosition;
             return;
         }
-        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + yOffset, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.fixedDeltaTime);
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + gameSettingsData.YOffset, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, gameSettingsData.Speed * Time.fixedDeltaTime);
         _lastPosition = transform.position;
     }
 }
