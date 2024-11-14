@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Scripts References")]
     [SerializeField] private EntitySO entityData;
-    // [SerializeField] private PlayerRotation playerRotation;
     
     [SerializeField] private LayerMask jumpLayer; 
     [SerializeField] private Transform feetPosition;
@@ -31,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _maxJumps = entityData.StartJumpsAmount;
+        GameplayUi.Instance.UpdateJumpsText(_maxJumps);
     }
 
     private void FixedUpdate()
@@ -51,12 +51,10 @@ public class PlayerMovement : MonoBehaviour
         
         if (_horizontalMovement > 0)
         {
-            // playerRotation.FlipPlayer(_horizontalMovement);
             Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
         }
         else if (_horizontalMovement < 0)
         {
-            // playerRotation.FlipPlayer(_horizontalMovement);
             Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
 
         }
@@ -122,5 +120,6 @@ public class PlayerMovement : MonoBehaviour
     public void AddMaxJumps()
     {
         this._maxJumps++;
+        GameplayUi.Instance.UpdateJumpsText(_maxJumps);
     }
 }

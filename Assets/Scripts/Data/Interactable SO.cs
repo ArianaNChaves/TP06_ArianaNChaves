@@ -9,6 +9,7 @@ public class InteractableSO : ScriptableObject
 {
     [Header("Heal")]
     [SerializeField] private int healAmount;
+    [SerializeField] private int maxHealthIncrease;
     
     [Header("Damage Boost")]
     [SerializeField] private int damageBoost;
@@ -24,6 +25,7 @@ public class InteractableSO : ScriptableObject
     
     
     public int HealAmount{get => healAmount; set => healAmount = value; }
+    public int MaxHealthIncrease{get => maxHealthIncrease; set => maxHealthIncrease = value; }
     public int DamageBoost{get => damageBoost; set => damageBoost = value; }
     public float Duration{get => invulnerabilityDuration; set => invulnerabilityDuration = value; }
     public int CoinAmount{get => coinValue; set => coinValue = value; }

@@ -11,14 +11,18 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float hitRadius;
 
     private float _timer;
-    private int _increasedDamage = 0;
-    
+
+    private void Start()
+    {
+        GameplayUi.Instance.UpdateDamageText(entityData.Damage);
+
+    }
     private void Update()
     {
         _timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= entityData.AttackRate)
         {
-            int damage = entityData.Damage + _increasedDamage;
+            int damage = entityData.Damage;
             Attack(damage);
             _timer = 0;
         }
@@ -44,9 +48,9 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hitPoint.position, hitRadius);
     }
-    public int IncreasedDamage
+    public int IncreaseDamage
     {
-        get => _increasedDamage;
-        set => _increasedDamage = value;
+        get => entityData.Damage;
+        set => entityData.Damage = value;
     }
 }

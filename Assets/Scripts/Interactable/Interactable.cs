@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Interactable : MonoBehaviour
 {
     private enum Type
     {
         Heal,
+        IncreaseMaxHealth,
         DamageBoost,
         Invulnerability,
         AddJumps,
@@ -16,6 +19,9 @@ public class Interactable : MonoBehaviour
     
     [SerializeField] private Type type;
     [SerializeField] private InteractableSO interactableData;
+    
+    private const int MinCoinsAmount = 2;
+    private const int MaxCoinsAmount = 5;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -48,9 +54,13 @@ public class Interactable : MonoBehaviour
                 AddPlayerJumps(obj);
                 break;
             }
-            case Type.Coin:
+            case Type.IncreaseMaxHealth:
             {
-                AddCoins(obj);
+                IncreasePlayerMaxHealth(obj);
+                break;
+            }case Type.Coin:
+            {
+                AddCoins();
                 break;
             }
             default:
@@ -77,7 +87,8 @@ public class Interactable : MonoBehaviour
         
         if (playerAttack == null) return;
         
-        playerAttack.IncreasedDamage = interactableData.DamageBoost;
+        playerAttack.IncreaseDamage += interactableData.DamageBoost;
+        GameplayUi.Instance.UpdateDamageText(playerAttack.IncreaseDamage);
         Destroy(this.gameObject);
     }
 
@@ -101,10 +112,21 @@ public class Interactable : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void AddCoins(GameObject obj)
+    private void IncreasePlayerMaxHealth(GameObject obj)
     {
-        Debug.Log("MAS GUITA PA"); 
+        Health playerHealth = obj.GetComponent<Health>();
         
+        if(playerHealth == null) return;
+        playerHealth.IncreaseMaxHealth(interactableData.MaxHealthIncrease);
+        
+        Destroy(this.gameObject);
+    }
+
+    private void AddCoins()
+    {
+        Debug.Log("MAS GUITA PA");
+        int currentCoinsAmount = Random.Range(MinCoinsAmount, MaxCoinsAmount + 1);
+        CoinsManager.Instance.AddCoins(currentCoinsAmount);
         Destroy(this.gameObject);
 
     }

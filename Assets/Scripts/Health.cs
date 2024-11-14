@@ -17,6 +17,7 @@ public class Health : MonoBehaviour, IHealthHandler
     {
         _health = entityData.MaxHealth;
         UpdateHealthBar();
+        GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
     }
     
     public void UpdateHealth(int amount)
@@ -51,6 +52,12 @@ public class Health : MonoBehaviour, IHealthHandler
     private void Die()
     {
         // Instantiate(particles, transform.position, Quaternion.identity);
+        bool wasCoinDroped = false;
+        if (!this.gameObject.CompareTag("Player") && !wasCoinDroped)
+        {
+            wasCoinDroped = true;
+            CoinsManager.Instance.SpawnCoin(this.gameObject.transform.position, this.gameObject.transform.rotation);
+        }
         Destroy(gameObject,0.01f);
     }
 
@@ -67,5 +74,12 @@ public class Health : MonoBehaviour, IHealthHandler
     public void ActivateInvulnerability(float invulnerabilityTime)
     {
         StartCoroutine(Invulnerability(invulnerabilityTime));
+    }
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        entityData.MaxHealth += amount;
+        UpdateHealthBar();
+        GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
     }
 }
