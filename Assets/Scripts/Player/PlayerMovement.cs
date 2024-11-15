@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Scripts References")]
     [SerializeField] private EntitySO entityData;
+    [SerializeField] private PlayerAnimations animations;
+    
     
     [SerializeField] private LayerMask jumpLayer; 
     [SerializeField] private Transform feetPosition;
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalMovement = Input.GetAxis("Horizontal");
         _horizontalMovement *= _isGrounded ? NormalSpeed : AirSpeedModifier;
-        
+        animations.Move(_horizontalMovement);
         if (_horizontalMovement > 0)
         {
             Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
