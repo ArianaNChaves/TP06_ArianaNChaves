@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     {
         _timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= entityData.AttackRate)
-        {
+        {   
             int damage = entityData.Damage;
             Attack(damage);
             _timer = 0;

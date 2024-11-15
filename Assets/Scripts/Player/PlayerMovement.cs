@@ -7,8 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Scripts References")]
     [SerializeField] private EntitySO entityData;
-    [SerializeField] private PlayerAnimations animations;
-    
     
     [SerializeField] private LayerMask jumpLayer; 
     [SerializeField] private Transform feetPosition;
@@ -50,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalMovement = Input.GetAxis("Horizontal");
         _horizontalMovement *= _isGrounded ? NormalSpeed : AirSpeedModifier;
-        animations.Move(_horizontalMovement);
+        
         if (_horizontalMovement > 0)
         {
             Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
@@ -63,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
         
         Vector2 speed = new Vector2(_horizontalMovement * (entityData.MovementSpeed), _rigidbody2D.velocity.y);
         _rigidbody2D.velocity = speed;
+        
+        if (_rigidbody2D.velocity.y != 0 || !_isGrounded) return;
+        
+        
     }
 
 
@@ -86,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _isFalling = true;
         }
-        
         if (Input.GetKeyDown(KeyCode.Space) && _canJump && _currentJumps < _maxJumps)
         {
             _currentJumps++;
