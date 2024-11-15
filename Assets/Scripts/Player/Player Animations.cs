@@ -24,10 +24,11 @@ public class PlayerAnimations : MonoBehaviour
     private AnimationState _currentAnimation;
     private bool _isGrounded = true;
     private float _timer = 0;
-    private float _attackDuration = 0.350f;
-
-    private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
-
+    private float _attackDuration = 0.35f;
+    private float _hitDuration = 0.15f;
+    private bool _isGettingHit = false;
+    private bool _isAttacking = false;
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -41,8 +42,9 @@ public class PlayerAnimations : MonoBehaviour
 
     private void AnimationHandler()
     {
-        AttackAnimation();
-        if(_animator.GetBool(IsAttacking)) return;
+        if (_isGettingHit) return;
+        Attacking();
+        if(_isAttacking) return;
         if (_isGrounded)
         {
             ChangeAnimation(Mathf.Abs(rigidBody2D.velocity.x) > 0f ? AnimationState.Walking : AnimationState.Idle);
@@ -61,25 +63,38 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
-    private void AttackAnimation()
+    private void Attacking()
     {
         float attackDelay = _attackDuration > entityData.AttackRate ? _attackDuration : entityData.AttackRate;
             
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= attackDelay)
         {
             _timer = 0;
-            ChangeAnimation(AnimationState.Attacking);
-            _animator.SetBool(IsAttacking, true);
-            Invoke(nameof(ChangeAttackStatus), _attackDuration);
+            StartCoroutine(AttackAnimation());
         }
     }
-    private void ChangeAttackStatus()
+    private IEnumerator AttackAnimation()
     {
-        _animator.SetBool(IsAttacking, false);
+        _isAttacking = true;
+        ChangeAnimation(AnimationState.Attacking);
+        yield return new WaitForSeconds(_attackDuration);
+        _isAttacking = false;
 
     }
-    
 
+    public void GettingHit()
+    {
+        StartCoroutine(HitAnimation());
+    }
+
+    private IEnumerator HitAnimation()
+    {
+        _isGettingHit = true;
+        ChangeAnimation(AnimationState.Hitting);
+        yield return new WaitForSeconds(_hitDuration);
+        _isGettingHit = false;
+    }
+    
     private void ChangeAnimation(AnimationState newAnimation)
     {
         if (_currentAnimation == newAnimation) return;

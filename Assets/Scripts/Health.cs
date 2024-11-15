@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,21 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour, IHealthHandler
 {
     [SerializeField] private Image healthBar;
-    // [SerializeField] private GameObject particles;
+    [SerializeField] private Animator animator;
     [SerializeField] private EntitySO entityData;
     
     private int _health;
     private bool _canReceiveDamage = true;
-    
+    private bool _isThePlayer;
+    private PlayerAnimations _playerAnimations;
+
     private void Start()
     {
+        _playerAnimations = GetComponentInChildren<PlayerAnimations>();
         _health = entityData.MaxHealth;
         UpdateHealthBar();
         GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
+        _isThePlayer = this.gameObject.CompareTag("Player");
     }
     
     public void UpdateHealth(int amount)
@@ -41,6 +46,10 @@ public class Health : MonoBehaviour, IHealthHandler
         }
 
         UpdateHealthBar();
+        if (_isThePlayer)
+        {
+            _playerAnimations.GettingHit();
+        }
     }
     
     private void UpdateHealthBar()
@@ -53,7 +62,7 @@ public class Health : MonoBehaviour, IHealthHandler
     {
         // Instantiate(particles, transform.position, Quaternion.identity);
         bool wasCoinDroped = false;
-        if (!this.gameObject.CompareTag("Player") && !wasCoinDroped)
+        if (!_isThePlayer && !wasCoinDroped)
         {
             wasCoinDroped = true;
             CoinsManager.Instance.SpawnCoin(this.gameObject.transform.position, this.gameObject.transform.rotation);
