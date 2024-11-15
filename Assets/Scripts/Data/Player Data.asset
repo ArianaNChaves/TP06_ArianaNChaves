@@ -16,5 +16,5 @@ MonoBehaviour:
   jumpForce: 7
   startJumpsAmount: 1
   maxHealth: 100
-  damage: 20
+  damage: 35
   attackRate: 1

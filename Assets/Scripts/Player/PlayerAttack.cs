@@ -11,19 +11,19 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float hitRadius;
 
     private float _timer;
+    private int _damage;
 
     private void Start()
     {
-        GameplayUi.Instance.UpdateDamageText(entityData.Damage);
-
+        _damage = entityData.Damage;
+        GameplayUi.Instance.UpdateDamageText(_damage);
     }
     private void Update()
     {
         _timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= entityData.AttackRate)
         {   
-            int damage = entityData.Damage;
-            Attack(damage);
+            Attack(_damage);
             _timer = 0;
         }
     }
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
     }
     public int IncreaseDamage
     {
-        get => entityData.Damage;
-        set => entityData.Damage = value;
+        get => _damage;
+        set => _damage = value;
     }
 }

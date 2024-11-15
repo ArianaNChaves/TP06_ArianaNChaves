@@ -13,6 +13,7 @@ public class Health : MonoBehaviour, IHealthHandler
     [SerializeField] private EntitySO entityData;
     
     private int _health;
+    private int _maxHealth;
     private bool _canReceiveDamage = true;
     private bool _isThePlayer;
     private PlayerAnimations _playerAnimations;
@@ -20,9 +21,10 @@ public class Health : MonoBehaviour, IHealthHandler
     private void Start()
     {
         _playerAnimations = GetComponentInChildren<PlayerAnimations>();
-        _health = entityData.MaxHealth;
+        _maxHealth = entityData.MaxHealth;
+        _health = _maxHealth;
         UpdateHealthBar();
-        GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
+        GameplayUi.Instance.UpdateMaxHealthText(_maxHealth);
         _isThePlayer = this.gameObject.CompareTag("Player");
     }
     
@@ -40,9 +42,9 @@ public class Health : MonoBehaviour, IHealthHandler
         {
             Die();
         }
-        if (_health > entityData.MaxHealth)
+        if (_health > _maxHealth)
         {
-            _health = entityData.MaxHealth;
+            _health = _maxHealth;
         }
 
         UpdateHealthBar();
@@ -54,13 +56,12 @@ public class Health : MonoBehaviour, IHealthHandler
     
     private void UpdateHealthBar()
     {
-        float clampedHealth = Mathf.Clamp(_health, 0, entityData.MaxHealth);
-        healthBar.fillAmount = clampedHealth / entityData.MaxHealth;
+        float clampedHealth = Mathf.Clamp(_health, 0, _maxHealth);
+        healthBar.fillAmount = clampedHealth / _maxHealth;
     }
     
     private void Die()
     {
-        // Instantiate(particles, transform.position, Quaternion.identity);
         bool wasCoinDroped = false;
         if (!_isThePlayer && !wasCoinDroped)
         {
@@ -89,8 +90,8 @@ public class Health : MonoBehaviour, IHealthHandler
 
     public void IncreaseMaxHealth(int amount)
     {
-        entityData.MaxHealth += amount;
+        _maxHealth += amount;
         UpdateHealthBar();
-        GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
+        GameplayUi.Instance.UpdateMaxHealthText(_maxHealth);
     }
 }
