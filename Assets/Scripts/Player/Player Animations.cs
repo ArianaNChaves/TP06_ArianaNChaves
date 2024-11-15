@@ -42,9 +42,9 @@ public class PlayerAnimations : MonoBehaviour
 
     private void AnimationHandler()
     {
-        if (_isGettingHit) return;
         Attacking();
         if(_isAttacking) return;
+        if (_isGettingHit) return;
         if (_isGrounded)
         {
             ChangeAnimation(Mathf.Abs(rigidBody2D.velocity.x) > 0f ? AnimationState.Walking : AnimationState.Idle);
