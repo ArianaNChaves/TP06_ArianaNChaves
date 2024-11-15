@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8190eb7d3c04ecf48abe52ec898ed80b, type: 3}
   m_Name: Interactable Data
   m_EditorClassIdentifier: 
-  healAmount: 30
+  healAmount: 50
   maxHealthIncrease: 40
   damageBoost: 20
   invulnerabilityDuration: 10

@@ -24,7 +24,14 @@ public class Machine : MonoBehaviour
     [SerializeField] private int candyCost;
     
     private PlayerMovement _playerMovement;
+    private Animator _animator;
     private bool _hasEnoughCoins;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -68,7 +75,8 @@ public class Machine : MonoBehaviour
     }
 
     private void ThrowCandy()
-    {
+    {   
+        _animator.Play("Chest");
         int randomCandy = Random.Range(0, 3);
         
         CoinsManager.Instance.ExpendCoins(candyCost);

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private static readonly int IsDead = Animator.StringToHash("isDead");
+
     [Header("References")]
     [SerializeField] private EntitySO entityData;
     
@@ -23,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     private State _state;
     private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
     private bool _isMovingToB;
     private bool _isWaiting = false;
     private bool _isChangingState = false;
@@ -38,12 +41,14 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _state = State.Patrol;
     }
 
     private void Update()
     {
+        if (_animator.GetBool(IsDead)) return;
         UpdateBodyRotation();
         CheckState();
     }

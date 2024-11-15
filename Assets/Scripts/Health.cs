@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IHealthHandler
 {
+    private static readonly int IsDead = Animator.StringToHash("isDead");
     [SerializeField] private Image healthBar;
     [SerializeField] private Animator animator;
     [SerializeField] private EntitySO entityData;
@@ -46,7 +47,7 @@ public class Health : MonoBehaviour, IHealthHandler
         }
 
         UpdateHealthBar();
-        if (_isThePlayer)
+        if (_isThePlayer && value < 0)
         {
             _playerAnimations.GettingHit();
         }
@@ -65,9 +66,11 @@ public class Health : MonoBehaviour, IHealthHandler
         if (!_isThePlayer && !wasCoinDroped)
         {
             wasCoinDroped = true;
+            animator.SetBool(IsDead, true);
+            animator.Play("Enemy Death");
             CoinsManager.Instance.SpawnCoin(this.gameObject.transform.position, this.gameObject.transform.rotation);
         }
-        Destroy(gameObject,0.01f);
+        Destroy(gameObject,0.35f);
     }
 
     private IEnumerator Invulnerability(float invulnerabilityTime)
