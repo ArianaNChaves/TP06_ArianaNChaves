@@ -11,7 +11,6 @@ public class Machine : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject maxHealthPrefab;
     [SerializeField] private GameObject damageBoostPrefab;
-    [SerializeField] private GameObject extraJumpsPrefab;
     [SerializeField] private GameObject healPrefab;
     
     [Header("Interact")]
@@ -24,9 +23,19 @@ public class Machine : MonoBehaviour
     [SerializeField] private int candyCost;
     
     private PlayerMovement _playerMovement;
+    private Animator _animator;
     private bool _hasEnoughCoins;
+    private bool _isShopping = false;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
+        _hasEnoughCoins = CoinsManager.Instance.GetCoinsAmount() >= candyCost;
+        ShowText();
         if (Input.GetKeyDown(KeyCode.E))
         {
             CheckCoins();
@@ -37,39 +46,43 @@ public class Machine : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        
-        _hasEnoughCoins = CoinsManager.Instance.GetCoinsAmount() >= candyCost;
-        _playerMovement = other.gameObject.GetComponent<PlayerMovement>();
-        
-        if (_hasEnoughCoins)
-        {
-            interactObj.SetActive(true);
-        }
-        else
-        {
-            notEnoughCoins.SetActive(true);
-        }
-        
+        _isShopping = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        _isShopping = false;
         interactObj.SetActive(false);
         notEnoughCoins.SetActive(false);
         
     }
 
+    private void ShowText()
+    {
+        if (!_isShopping) return;
+        if (_hasEnoughCoins)
+        {
+            interactObj.SetActive(true);
+            notEnoughCoins.SetActive(false);
+        }
+        else
+        {
+            notEnoughCoins.SetActive(true);
+            interactObj.SetActive(false);
+        }
+    }
+
     private void CheckCoins()
     {
-        _hasEnoughCoins = CoinsManager.Instance.GetCoinsAmount() >= candyCost;
         if (!_hasEnoughCoins) return;
         ThrowCandy();
     }
 
     private void ThrowCandy()
-    {
-        int randomCandy = Random.Range(0, 3);
+    {   
+        _animator.Play("Chest");
+        int randomCandy = Random.Range(0, 2);
         
         CoinsManager.Instance.ExpendCoins(candyCost);
         switch (randomCandy)
@@ -82,12 +95,6 @@ public class Machine : MonoBehaviour
             case 1:
             {
                 Instantiate(damageBoostPrefab, throwPosition.position, Quaternion.identity);
-                break;
-            }
-            case 2:
-            {
-                Instantiate(_playerMovement.GetMaxJumps() <= gameSettingsData.MaxJumps ? extraJumpsPrefab : healPrefab,
-                    throwPosition.position, Quaternion.identity);
                 break;
             }
             default:

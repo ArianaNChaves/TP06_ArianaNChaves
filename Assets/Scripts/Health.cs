@@ -7,11 +7,13 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IHealthHandler
 {
+    private static readonly int IsDead = Animator.StringToHash("isDead");
     [SerializeField] private Image healthBar;
     [SerializeField] private Animator animator;
     [SerializeField] private EntitySO entityData;
     
     private int _health;
+    private int _maxHealth;
     private bool _canReceiveDamage = true;
     private bool _isThePlayer;
     private PlayerAnimations _playerAnimations;
@@ -19,9 +21,10 @@ public class Health : MonoBehaviour, IHealthHandler
     private void Start()
     {
         _playerAnimations = GetComponentInChildren<PlayerAnimations>();
-        _health = entityData.MaxHealth;
+        _maxHealth = entityData.MaxHealth;
+        _health = _maxHealth;
         UpdateHealthBar();
-        GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
+        GameplayUi.Instance.UpdateMaxHealthText(_maxHealth);
         _isThePlayer = this.gameObject.CompareTag("Player");
     }
     
@@ -31,7 +34,6 @@ public class Health : MonoBehaviour, IHealthHandler
         if (amount < 0 && !_canReceiveDamage)
         {
             value = 0;
-            Debug.Log("NO PUEDE RECIBIR DANIO PERRA ~ Health.cs/UpdateHealth");
         }
             
         _health += value;
@@ -40,13 +42,13 @@ public class Health : MonoBehaviour, IHealthHandler
         {
             Die();
         }
-        if (_health > entityData.MaxHealth)
+        if (_health > _maxHealth)
         {
-            _health = entityData.MaxHealth;
+            _health = _maxHealth;
         }
 
         UpdateHealthBar();
-        if (_isThePlayer)
+        if (_isThePlayer && value < 0)
         {
             _playerAnimations.GettingHit();
         }
@@ -54,20 +56,21 @@ public class Health : MonoBehaviour, IHealthHandler
     
     private void UpdateHealthBar()
     {
-        float clampedHealth = Mathf.Clamp(_health, 0, entityData.MaxHealth);
-        healthBar.fillAmount = clampedHealth / entityData.MaxHealth;
+        float clampedHealth = Mathf.Clamp(_health, 0, _maxHealth);
+        healthBar.fillAmount = clampedHealth / _maxHealth;
     }
     
     private void Die()
     {
-        // Instantiate(particles, transform.position, Quaternion.identity);
         bool wasCoinDroped = false;
         if (!_isThePlayer && !wasCoinDroped)
         {
             wasCoinDroped = true;
+            animator.SetBool(IsDead, true);
+            animator.Play("Enemy Death");
             CoinsManager.Instance.SpawnCoin(this.gameObject.transform.position, this.gameObject.transform.rotation);
         }
-        Destroy(gameObject,0.01f);
+        Destroy(gameObject,0.35f);
     }
 
     private IEnumerator Invulnerability(float invulnerabilityTime)
@@ -87,8 +90,8 @@ public class Health : MonoBehaviour, IHealthHandler
 
     public void IncreaseMaxHealth(int amount)
     {
-        entityData.MaxHealth += amount;
+        _maxHealth += amount;
         UpdateHealthBar();
-        GameplayUi.Instance.UpdateMaxHealthText(entityData.MaxHealth);
+        GameplayUi.Instance.UpdateMaxHealthText(_maxHealth);
     }
 }
