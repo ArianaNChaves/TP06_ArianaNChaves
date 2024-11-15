@@ -32,7 +32,6 @@ public class Health : MonoBehaviour, IHealthHandler
         if (amount < 0 && !_canReceiveDamage)
         {
             value = 0;
-            Debug.Log("NO PUEDE RECIBIR DANIO PERRA ~ Health.cs/UpdateHealth");
         }
             
         _health += value;
