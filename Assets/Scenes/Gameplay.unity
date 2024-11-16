@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 146540040}
   - component: {fileID: 146540042}
   - component: {fileID: 146540041}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Fall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 146540039}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 349e777fed546d9419ad23d919f86b5d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -220,7 +220,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.079143524, y: 0.2770053}
@@ -489,10 +489,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2225201655661537132, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: hitRadius
-      value: 1.31
-      objectReference: {fileID: 0}
     - target: {fileID: 3403547900509121695, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.44
@@ -533,80 +529,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5210209995220768718, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 5210209995220768718, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.29
-      objectReference: {fileID: 0}
     - target: {fileID: 5486959850702895225, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
       propertyPath: m_Name
       value: Player Holder
       objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: low.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: low.b
-      value: 0.86428785
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: low.g
-      value: 0.8867924
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: low.r
-      value: 0.56470275
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: high.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: high.b
-      value: 0.79597056
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: high.g
-      value: 0.8584906
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: high.r
-      value: 0.0040494935
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: spriteRenderer
-      value: 
-      objectReference: {fileID: 745496832}
-    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557981250830529736, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7557981250830529736, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 335322243653521788, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -632,7 +559,7 @@ GameObject:
   - component: {fileID: 355596475}
   - component: {fileID: 355596474}
   - component: {fileID: 355596473}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Win collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +607,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.9588265, y: -0.85920215}
@@ -722,7 +649,7 @@ GameObject:
   - component: {fileID: 366910375}
   - component: {fileID: 366910377}
   - component: {fileID: 366910376}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -765,7 +692,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 366910374}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 349e777fed546d9419ad23d919f86b5d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -785,7 +712,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.079143524, y: 0.2770053}
@@ -1794,11 +1721,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 649655520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &745496832 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
-  m_PrefabInstance: {fileID: 271581959}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &772358007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1949,7 +1871,7 @@ Transform:
   m_GameObject: {fileID: 900638123}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.876205, y: 2.9547253, z: -0.8627007}
+  m_LocalPosition: {x: 61.876205, y: 4.15, z: -0.8627007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72638,7 +72560,7 @@ GameObject:
   - component: {fileID: 2014429368}
   - component: {fileID: 2014429370}
   - component: {fileID: 2014429369}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72681,7 +72603,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2014429367}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 349e777fed546d9419ad23d919f86b5d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -72701,7 +72623,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.079143524, y: 0.2770053}
