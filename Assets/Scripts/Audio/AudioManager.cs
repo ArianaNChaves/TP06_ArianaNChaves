@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -14,8 +12,10 @@ public class AudioManager : MonoBehaviour
     private string _lastSong;
     private float _musicVolume;
     private float _SFXVolume;
+    private float _globalVolume;
     private const string MixerMusic = "MusicVolume";
-    private const string MixerSFX = "SFXVolume";
+    private const string MixerSFX = "SfxVolume";
+    private const string MixerMaster = "MasterVolume";
     private void Awake()
     {
         if (Instance == null)
@@ -65,15 +65,25 @@ public class AudioManager : MonoBehaviour
         _SFXVolume = volume;
         audioMixer.SetFloat(MixerSFX, Mathf.Log10(volume) * 20);
     }
+    
+    public void GlobalVolume(float volume)
+    {
+        _globalVolume = volume;
+        audioMixer.SetFloat(MixerMaster, Mathf.Log10(volume) * 20);
+    }
 
     public float GetMusicVolume()
     {
         return _musicVolume;
     }
-
     public float GetSFXVolume()
     {
         return _SFXVolume;
+    }
+    
+    public float GetGlobalVolume()
+    {
+        return _globalVolume;
     }
     public void StopMusic()
     {

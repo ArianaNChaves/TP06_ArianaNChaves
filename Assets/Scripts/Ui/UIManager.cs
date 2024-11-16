@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -45,12 +42,13 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        //AudioManager.Instance.PlayMusic("Main Theme");
+        AudioManager.Instance.PlayMusic("Menu");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         
-        //AudioManager.Instance.MusicVolume(musicVolume.value);
-        //AudioManager.Instance.SfxVolume(sfxVolume.value);
+        AudioManager.Instance.MusicVolume(musicVolume.value);
+        AudioManager.Instance.SfxVolume(sfxVolume.value);
+        AudioManager.Instance.GlobalVolume(globalVolume.value);
     }
 
     private void OnDestroy()
@@ -66,6 +64,7 @@ public class UIManager : MonoBehaviour
         
         musicVolume.onValueChanged.RemoveListener(SetMusicVolume);
         sfxVolume.onValueChanged.RemoveListener(SetSFXVolume);
+        globalVolume.onValueChanged.RemoveListener(SetSFXVolume);
     }
 
     private void OnPlayButtonClicked()
@@ -101,18 +100,18 @@ public class UIManager : MonoBehaviour
     }
     private void OnSoundEffectsButtonClicked()
     {
-        //AudioManager.Instance.PlayEffect("Gunshot");
+        AudioManager.Instance.PlayEffect("Enemy Die");
     }
     public void SetMusicVolume(float value)
     {
-        //AudioManager.Instance.MusicVolume(value);
+        AudioManager.Instance.MusicVolume(value);
     }
     public void SetSFXVolume(float value)
     {
-        //AudioManager.Instance.SfxVolume(value);
+        AudioManager.Instance.SfxVolume(value);
     }
     public void SetGlobalVolume(float value)
     {
-        //AudioManager.Instance.SfxVolume(value);
+        AudioManager.Instance.GlobalVolume(value);
     }
 }

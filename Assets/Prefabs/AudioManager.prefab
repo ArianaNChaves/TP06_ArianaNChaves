@@ -51,7 +51,21 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b6dc04f2884eb5b46b675390b1e75e84, type: 3}
   - soundName: Gemplay
     clip: {fileID: 8300000, guid: 0c2f5e196afe4644d9b1ffb8d644851d, type: 3}
-  sfxSounds: []
+  sfxSounds:
+  - soundName: Pickup
+    clip: {fileID: 8300000, guid: 478c2c599b36d0c4fa37546967461141, type: 3}
+  - soundName: Enemy Die
+    clip: {fileID: 8300000, guid: aac640d73f15f3744a8f6f364fd138df, type: 3}
+  - soundName: Jump
+    clip: {fileID: 8300000, guid: 098522c74a22cc1478fdd473fb950f3d, type: 3}
+  - soundName: Lose
+    clip: {fileID: 8300000, guid: 84817ded5bb0b034cb31576107a0cb98, type: 3}
+  - soundName: Hit
+    clip: {fileID: 8300000, guid: 8aef5868415361846889dcda245f5a2e, type: 3}
+  - soundName: Punch
+    clip: {fileID: 8300000, guid: 8894673a994a1c44e910a9cd268be414, type: 3}
+  - soundName: Win
+    clip: {fileID: 8300000, guid: 62b29989ccd370445a0d4e4fe840c61f, type: 3}
   audioMixer: {fileID: 24100000, guid: e47dd0de31f87a044b61cf75338ae876, type: 2}
   musicSource: {fileID: 1004298485567445814}
   sfxSource: {fileID: 8564921739730930673}
