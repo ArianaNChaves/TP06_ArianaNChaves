@@ -34,4 +34,8 @@ public class EndScreen : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+    public void OnMouseHover()
+    {
+        AudioManager.Instance.PlayEffect("Ui");
+    }
 }

@@ -33,7 +33,6 @@ public class UIManager : MonoBehaviour
         settingsBackButton.onClick.AddListener(OnSettingsBackButtonClicked);
         creditsBackButton.onClick.AddListener(OnCreditsBackButtonClicked);
         sfxButton.onClick.AddListener(OnSoundEffectsButtonClicked);
-
         
         musicVolume.onValueChanged.AddListener(SetMusicVolume);
         sfxVolume.onValueChanged.AddListener(SetSFXVolume);
@@ -113,5 +112,10 @@ public class UIManager : MonoBehaviour
     public void SetGlobalVolume(float value)
     {
         AudioManager.Instance.GlobalVolume(value);
+    }
+
+    public void OnMouseHover()
+    {
+        AudioManager.Instance.PlayEffect("Ui");
     }
 }

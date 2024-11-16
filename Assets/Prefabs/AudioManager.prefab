@@ -66,6 +66,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8894673a994a1c44e910a9cd268be414, type: 3}
   - soundName: Win
     clip: {fileID: 8300000, guid: 62b29989ccd370445a0d4e4fe840c61f, type: 3}
+  - soundName: Ui
+    clip: {fileID: 8300000, guid: 6b9cd5e582bdded49b0a502f9bfb7079, type: 3}
   audioMixer: {fileID: 24100000, guid: e47dd0de31f87a044b61cf75338ae876, type: 2}
   musicSource: {fileID: 1004298485567445814}
   sfxSource: {fileID: 8564921739730930673}
