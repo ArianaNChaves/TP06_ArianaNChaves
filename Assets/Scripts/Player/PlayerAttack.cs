@@ -12,9 +12,13 @@ public class PlayerAttack : MonoBehaviour
 
     private float _timer;
     private int _damage;
+    private Animator _animator;
+    private RaycastHit2D[] _hits;
+    private const float AttackAnimationDuration = 0.35f;
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         _damage = entityData.Damage;
         GameplayUi.Instance.UpdateDamageText(_damage);
     }
@@ -30,17 +34,28 @@ public class PlayerAttack : MonoBehaviour
     
     private void Attack(int damage)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(hitPoint.position, hitRadius);
-        foreach (var obj in colliders)
+        StartCoroutine(AttackAnimation());
+        _hits = Physics2D.CircleCastAll(hitPoint.position, hitRadius, transform.right, 0f, damageableLayer);
+
+        for (int i = 0; i < _hits.Length; i++)
         {
-            if (obj.gameObject == this.gameObject) continue;
-            if(!Utilities.CompareLayerAndMask(obj.gameObject.layer, damageableLayer)) continue;
-            
-            IHealthHandler healthHandler = obj.gameObject.GetComponent<IHealthHandler>();
-            if (healthHandler == null) return;
-            
-            healthHandler.UpdateHealth(-damage); //No es costoso el metodo, tiene un debug adentro.
+            if (_hits[i].collider.gameObject == this.gameObject) continue;
+            IHealthHandler healthHandler = _hits[i].collider.gameObject.GetComponent<IHealthHandler>();
+            healthHandler?.UpdateHealth(-damage);
         }
+    }
+
+    private IEnumerator AttackAnimation()
+    {
+        float resetAnim = AttackAnimationDuration;
+        if (resetAnim > entityData.AttackRate)
+        {
+            resetAnim = entityData.AttackRate;
+        }
+        _animator.SetBool("isAttacking", true);
+        yield return new WaitForSeconds(resetAnim);
+        _animator.SetBool("isAttacking", false);
+
     }
 
     private void OnDrawGizmos()

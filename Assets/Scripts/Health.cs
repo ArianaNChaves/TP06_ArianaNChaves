@@ -16,11 +16,9 @@ public class Health : MonoBehaviour, IHealthHandler
     private int _maxHealth;
     private bool _canReceiveDamage = true;
     private bool _isThePlayer;
-    private PlayerAnimations _playerAnimations;
 
     private void Start()
     {
-        _playerAnimations = GetComponentInChildren<PlayerAnimations>();
         _maxHealth = entityData.MaxHealth;
         _health = _maxHealth;
         UpdateHealthBar();
@@ -48,10 +46,6 @@ public class Health : MonoBehaviour, IHealthHandler
         }
 
         UpdateHealthBar();
-        if (_isThePlayer && value < 0)
-        {
-            _playerAnimations.GettingHit();
-        }
     }
     
     private void UpdateHealthBar()
