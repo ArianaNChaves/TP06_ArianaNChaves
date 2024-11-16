@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -72,6 +73,10 @@ public class Health : MonoBehaviour, IHealthHandler
             animator.Play("Enemy Death");
             CoinsManager.Instance.SpawnCoin(this.gameObject.transform.position, this.gameObject.transform.rotation);
         }
+        if (_isThePlayer)
+        {
+            Lose();
+        }
         Destroy(gameObject,0.35f);
     }
 
@@ -120,5 +125,10 @@ public class Health : MonoBehaviour, IHealthHandler
     {
         _maxHealth += amount;
         UpdateHealthBar();
+    }
+
+    private void Lose()
+    {
+        SceneManager.LoadScene("LoseScreen");
     }
 }
