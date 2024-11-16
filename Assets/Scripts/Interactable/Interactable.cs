@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,10 +17,11 @@ public class Interactable : MonoBehaviour
         AddJumps,
         Coin,
     }
-    
+    public static event Action<string> ItemCollected;
     [SerializeField] private Type type;
     [SerializeField] private InteractableSO interactableData;
     [SerializeField] private GameSettingsSO gameSettingsData;
+    [SerializeField] private string textToWrite;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,6 +32,7 @@ public class Interactable : MonoBehaviour
 
     private void EnumHandler(GameObject obj)
     {
+        ItemCollected?.Invoke(textToWrite);
         switch (type)
         {
             case Type.Heal:
@@ -56,7 +59,8 @@ public class Interactable : MonoBehaviour
             {
                 IncreasePlayerMaxHealth(obj);
                 break;
-            }case Type.Coin:
+            }
+            case Type.Coin:
             {
                 AddCoins();
                 break;
@@ -125,6 +129,7 @@ public class Interactable : MonoBehaviour
         int currentCoinsAmount = Random.Range((int)gameSettingsData.CoinValueRange.x, (int)gameSettingsData.CoinValueRange.y + 1);
         CoinsManager.Instance.AddCoins(currentCoinsAmount);
         Destroy(this.gameObject);
-
     }
+
+    
 }

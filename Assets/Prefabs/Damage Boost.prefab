@@ -102,6 +102,7 @@ MonoBehaviour:
   type: 2
   interactableData: {fileID: 11400000, guid: a64c8556b87a0344da345fe627fbce5b, type: 2}
   gameSettingsData: {fileID: 11400000, guid: 320dfb7f885b95c448fa4ab7f7402ae8, type: 2}
+  textToWrite: You deal more damage!
 --- !u!58 &3226805769597261671
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -102,6 +102,7 @@ MonoBehaviour:
   type: 5
   interactableData: {fileID: 11400000, guid: a64c8556b87a0344da345fe627fbce5b, type: 2}
   gameSettingsData: {fileID: 11400000, guid: 320dfb7f885b95c448fa4ab7f7402ae8, type: 2}
+  textToWrite: You picked a coin!
 --- !u!58 &5214386374657716472
 CircleCollider2D:
   m_ObjectHideFlags: 0
