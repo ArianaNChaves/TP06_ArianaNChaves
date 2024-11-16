@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [Header("Sliders")] 
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider sfxVolume;
+    [SerializeField] private Slider globalVolume;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
         
         musicVolume.onValueChanged.AddListener(SetMusicVolume);
         sfxVolume.onValueChanged.AddListener(SetSFXVolume);
+        globalVolume.onValueChanged.AddListener(SetGlobalVolume);
     }
 
     private void Start()
@@ -106,6 +108,10 @@ public class UIManager : MonoBehaviour
         //AudioManager.Instance.MusicVolume(value);
     }
     public void SetSFXVolume(float value)
+    {
+        //AudioManager.Instance.SfxVolume(value);
+    }
+    public void SetGlobalVolume(float value)
     {
         //AudioManager.Instance.SfxVolume(value);
     }
