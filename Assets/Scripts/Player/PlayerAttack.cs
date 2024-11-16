@@ -13,23 +13,30 @@ public class PlayerAttack : MonoBehaviour
     private float _timer;
     private int _damage;
     private Animator _animator;
+    private Rigidbody2D _rigidbody2D;
     private RaycastHit2D[] _hits;
     private const float AttackAnimationDuration = 0.35f;
 
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        _rigidbody2D = GetComponentInChildren<Rigidbody2D>();
         _damage = entityData.Damage;
         GameplayUi.Instance.UpdateDamageText(_damage);
     }
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= entityData.AttackRate)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer >= entityData.AttackRate && ValidateAttack())
         {   
             Attack(_damage);
             _timer = 0;
         }
+    }
+
+    private bool ValidateAttack()
+    {
+        return Mathf.Abs(_rigidbody2D.velocity.y) <= 0.01f;
     }
     
     private void Attack(int damage)
