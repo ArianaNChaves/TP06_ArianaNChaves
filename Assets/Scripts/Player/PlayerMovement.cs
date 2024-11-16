@@ -5,17 +5,22 @@ using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
+    private static readonly int JumpVelocity = Animator.StringToHash("JumpVelocity");
+    private static readonly int IsGrounded = Animator.StringToHash("isGrounded");
+
     [Header("Scripts References")]
     [SerializeField] private EntitySO entityData;
     
     [SerializeField] private LayerMask jumpLayer; 
     [SerializeField] private Transform feetPosition;
     [SerializeField] private Vector2 collisionBoxSize;
-    [SerializeField] private float jumpDelayTime = 0.7f;
+    [SerializeField] private float jumpDelayTime = 0.4f;
 
     [SerializeField] private Transform body;
 
     private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
     private int _maxJumps;
     private int _currentJumps = 0;
     private bool _isGrounded;
@@ -28,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFacingRight = true;
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _maxJumps = entityData.StartJumpsAmount;
         GameplayUi.Instance.UpdateJumpsText(_maxJumps);
@@ -48,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalMovement = Input.GetAxis("Horizontal");
         _horizontalMovement *= _isGrounded ? NormalSpeed : AirSpeedModifier;
-        
+        _animator.SetFloat(MoveSpeed, Mathf.Abs(_horizontalMovement));
         if (_horizontalMovement > 0)
         {
             Utilities.RotateObjectOnMovement(_horizontalMovement, ref _isFacingRight, ref body);
@@ -62,28 +68,24 @@ public class PlayerMovement : MonoBehaviour
         Vector2 speed = new Vector2(_horizontalMovement * (entityData.MovementSpeed), _rigidbody2D.velocity.y);
         _rigidbody2D.velocity = speed;
         
-        if (_rigidbody2D.velocity.y != 0 || !_isGrounded) return;
-        
-        
     }
 
 
     private void JumpDelay()
     {
-        if (!_canJump)
-        {
-            _jumpTimer += Time.deltaTime;
+        if (_canJump) return;
+        _jumpTimer += Time.deltaTime;
         
-            if (_jumpTimer >= jumpDelayTime)
-            {
-                _canJump = true;
-            }
+        if (_jumpTimer >= jumpDelayTime)
+        {
+            _canJump = true;
         }
     }
     
     private void JumpHandler()
     {
         JumpDelay();
+        _animator.SetFloat(JumpVelocity, _rigidbody2D.velocity.y);
         if (_rigidbody2D.velocity.y <= 0)
         {
             _isFalling = true;
@@ -100,14 +102,16 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
         _rigidbody2D.AddForce(Vector2.up * entityData.JumpForce, ForceMode2D.Impulse);
     }
+
 
     private void CheckGrounded()
     {
         Collider2D hit = Physics2D.OverlapBox(feetPosition.position, collisionBoxSize, 0, jumpLayer);
         _isGrounded = hit != null;
-
+        _animator.SetBool(IsGrounded, _isGrounded);
         if (_isGrounded && _isFalling)
         {
             _currentJumps = 0;

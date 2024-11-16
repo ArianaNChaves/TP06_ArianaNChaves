@@ -63,11 +63,13 @@ public class Machine : MonoBehaviour
         if (!_isShopping) return;
         if (_hasEnoughCoins)
         {
+            _animator.SetBool("isBuying",true);
             interactObj.SetActive(true);
             notEnoughCoins.SetActive(false);
         }
         else
         {
+            _animator.SetBool("isBuying",false);
             notEnoughCoins.SetActive(true);
             interactObj.SetActive(false);
         }
@@ -81,7 +83,7 @@ public class Machine : MonoBehaviour
 
     private void ThrowCandy()
     {   
-        _animator.Play("Chest");
+        
         int randomCandy = Random.Range(0, 2);
         
         CoinsManager.Instance.ExpendCoins(candyCost);

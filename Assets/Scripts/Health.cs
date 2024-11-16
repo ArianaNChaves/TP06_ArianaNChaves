@@ -10,17 +10,19 @@ public class Health : MonoBehaviour, IHealthHandler
     private static readonly int IsDead = Animator.StringToHash("isDead");
     [SerializeField] private Image healthBar;
     [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private EntitySO entityData;
+    [SerializeField] private Color low;
+    [SerializeField] private Color high;
     
     private int _health;
     private int _maxHealth;
     private bool _canReceiveDamage = true;
     private bool _isThePlayer;
-    private PlayerAnimations _playerAnimations;
+    private Color _defaultColor = Color.white;
 
     private void Start()
     {
-        _playerAnimations = GetComponentInChildren<PlayerAnimations>();
         _maxHealth = entityData.MaxHealth;
         _health = _maxHealth;
         UpdateHealthBar();
@@ -35,6 +37,11 @@ public class Health : MonoBehaviour, IHealthHandler
         {
             value = 0;
         }
+
+        if (value < 0 && _isThePlayer)
+        {
+            StartCoroutine(HittingAnimation());
+        }
             
         _health += value;
         
@@ -48,10 +55,6 @@ public class Health : MonoBehaviour, IHealthHandler
         }
 
         UpdateHealthBar();
-        if (_isThePlayer && value < 0)
-        {
-            _playerAnimations.GettingHit();
-        }
     }
     
     private void UpdateHealthBar()
@@ -73,6 +76,21 @@ public class Health : MonoBehaviour, IHealthHandler
         Destroy(gameObject,0.35f);
     }
 
+    private IEnumerator InvulnerabilityColoring()
+    {
+        while (!_canReceiveDamage)
+        {
+            spriteRenderer.color = low;
+            yield return new WaitForSeconds(0.08f);
+
+            spriteRenderer.color = high;
+            yield return new WaitForSeconds(0.08f);
+        }
+
+        spriteRenderer.color = Color.white;
+        
+    }
+
     private IEnumerator Invulnerability(float invulnerabilityTime)
     {
         _canReceiveDamage = false;
@@ -82,10 +100,21 @@ public class Health : MonoBehaviour, IHealthHandler
         _canReceiveDamage = true;
         
     }
+
+    private IEnumerator HittingAnimation()
+    {
+        animator.SetBool("wasHitting", true);
+
+        yield return new WaitForSeconds(0.15f);  
+        
+        animator.SetBool("wasHitting", false);
+        
+    }
     
     public void ActivateInvulnerability(float invulnerabilityTime)
     {
         StartCoroutine(Invulnerability(invulnerabilityTime));
+        StartCoroutine(InvulnerabilityColoring());
     }
 
     public void IncreaseMaxHealth(int amount)
