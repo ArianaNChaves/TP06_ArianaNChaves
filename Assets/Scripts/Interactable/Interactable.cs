@@ -90,7 +90,6 @@ public class Interactable : MonoBehaviour
         if (playerAttack == null) return;
         
         playerAttack.IncreaseDamage += interactableData.DamageBoost;
-        GameplayUi.Instance.UpdateDamageText(playerAttack.IncreaseDamage);
         Destroy(this.gameObject);
     }
 

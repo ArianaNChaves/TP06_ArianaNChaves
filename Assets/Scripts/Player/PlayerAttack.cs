@@ -22,7 +22,6 @@ public class PlayerAttack : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponentInChildren<Rigidbody2D>();
         _damage = entityData.Damage;
-        GameplayUi.Instance.UpdateDamageText(_damage);
     }
     private void Update()
     {

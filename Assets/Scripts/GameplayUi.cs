@@ -29,21 +29,7 @@ public class GameplayUi : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public void UpdateDamageText(int damage)
-    {
-        damageText.text = damage.ToString();
-    }
-
-    public void UpdateJumpsText(int jumps)
-    {
-        jumpsText.text = jumps.ToString();
-    }
-
-    public void UpdateMaxHealthText(int maxHealth)
-    {
-        maxHealthText.text = maxHealth.ToString();
-    }
+    
 
     public void UpdateCoinsText(int coins)
     {

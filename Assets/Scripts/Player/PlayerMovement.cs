@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _maxJumps = entityData.StartJumpsAmount;
-        GameplayUi.Instance.UpdateJumpsText(_maxJumps);
     }
 
     private void FixedUpdate()
@@ -127,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
     public void AddMaxJumps()
     {
         this._maxJumps++;
-        GameplayUi.Instance.UpdateJumpsText(_maxJumps);
     }
 
     public int GetMaxJumps()

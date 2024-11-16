@@ -26,7 +26,6 @@ public class Health : MonoBehaviour, IHealthHandler
         _maxHealth = entityData.MaxHealth;
         _health = _maxHealth;
         UpdateHealthBar();
-        GameplayUi.Instance.UpdateMaxHealthText(_maxHealth);
         _isThePlayer = this.gameObject.CompareTag("Player");
     }
     
@@ -121,6 +120,5 @@ public class Health : MonoBehaviour, IHealthHandler
     {
         _maxHealth += amount;
         UpdateHealthBar();
-        GameplayUi.Instance.UpdateMaxHealthText(_maxHealth);
     }
 }

@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene("Gameplay");
     }
     private void OnCreditsButtonClicked()
     {
