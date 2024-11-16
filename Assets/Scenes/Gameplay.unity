@@ -437,6 +437,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Holder
       objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: low.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: low.b
+      value: 0.86428785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: low.g
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: low.r
+      value: 0.56470275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: high.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: high.b
+      value: 0.79597056
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: high.g
+      value: 0.8584906
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: high.r
+      value: 0.0040494935
+      objectReference: {fileID: 0}
+    - target: {fileID: 7079282382502211931, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 745496832}
+    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
       propertyPath: m_SortingOrder
       value: 5
@@ -1455,6 +1503,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 649655520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &745496832 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7165494185093907309, guid: ac9b73d5e1b16f24cb78a1700999a278, type: 3}
+  m_PrefabInstance: {fileID: 271581959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &772358007
 PrefabInstance:
   m_ObjectHideFlags: 0
