@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
     private void MovingTo(Vector2 targetDirection)
     {
         Vector2 direction = (targetDirection - (Vector2)transform.position).normalized;
-        _rigidbody2D.velocity = new Vector2(direction.x * entityData.MovementSpeed, transform.position.y);
+        _rigidbody2D.velocity = new Vector2(direction.x * entityData.MovementSpeed, _rigidbody2D.velocity.y);
     }
 
     private IEnumerator ChangeDirection()
@@ -102,9 +102,15 @@ public class Enemy : MonoBehaviour
     private void InitiateCombat()
     {
         if(!target) return;
+        if (target.position.x > positionA.position.x || target.position.x < positionB.position.x)
+        {
+            ChangingStateTo(State.Patrol);
+            return;
+        }
         _timer += Time.deltaTime;
         Vector2 targetX = new Vector2(target.position.x, transform.position.y);
         MovingTo(targetX);
+
         if (Mathf.Abs(transform.position.x - targetX.x) < maxDistance)
         {
             _rigidbody2D.velocity = Vector2.zero;

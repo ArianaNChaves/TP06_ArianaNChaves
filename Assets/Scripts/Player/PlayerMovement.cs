@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _canJump = true;
     private float _horizontalMovement;
     private const float NormalSpeed = 1.0f;
-    private const float AirSpeedModifier = 0.8f;
+    private const float AirSpeedModifier = 0.5f;
     private float _jumpTimer = 0;
     private bool _isFalling = false;
     private bool _isFacingRight = true;
