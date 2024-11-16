@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
     private void InitiateCombat()
     {
         if(!target) return;
-        if (target.position.x > positionA.position.x || target.position.x < positionB.position.x)
+        if (transform.position.x >= positionA.position.x || transform.position.x <= positionB.position.x)
         {
             ChangingStateTo(State.Patrol);
             return;
