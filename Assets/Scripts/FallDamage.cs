@@ -18,6 +18,8 @@ public class FallDamage : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        AudioManager.Instance.PlayEffect("Lose");
+        GameData.Instance.AddCoins(CoinsManager.Instance.GetCoinsAmount());
         SceneManager.LoadScene("LoseScreen");
     }
 }
