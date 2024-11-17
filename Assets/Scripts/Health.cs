@@ -41,6 +41,7 @@ public class Health : MonoBehaviour, IHealthHandler
         if (value < 0 && _isThePlayer)
         {
             StartCoroutine(HittingAnimation());
+            AudioManager.Instance.PlayEffect("Hit");
         }
             
         _health += value;
@@ -72,9 +73,11 @@ public class Health : MonoBehaviour, IHealthHandler
             animator.SetBool(IsDead, true);
             animator.Play("Enemy Death");
             CoinsManager.Instance.SpawnCoin(this.gameObject.transform.position, this.gameObject.transform.rotation);
+            AudioManager.Instance.PlayEffect("Enemy Die");
         }
         if (_isThePlayer)
         {
+            AudioManager.Instance.PlayEffect("Lose");
             Lose();
         }
         Destroy(gameObject,0.35f);

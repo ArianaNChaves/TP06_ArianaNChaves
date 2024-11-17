@@ -33,6 +33,7 @@ public class Interactable : MonoBehaviour
     private void EnumHandler(GameObject obj)
     {
         ItemCollected?.Invoke(textToWrite);
+        AudioManager.Instance.PlayEffect("Pickup");
         switch (type)
         {
             case Type.Heal:

@@ -9,6 +9,7 @@ public class WinCondition : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        AudioManager.Instance.PlayEffect("Win");
         SceneManager.LoadScene("WinScreen");
     }
 }

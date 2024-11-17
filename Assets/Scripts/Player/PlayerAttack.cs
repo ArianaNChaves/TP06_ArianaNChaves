@@ -40,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
     
     private void Attack(int damage)
     {
+        AudioManager.Instance.PlayEffect("Punch");
         StartCoroutine(AttackAnimation());
         _hits = Physics2D.CircleCastAll(hitPoint.position, hitRadius, transform.right, 0f, damageableLayer);
 
