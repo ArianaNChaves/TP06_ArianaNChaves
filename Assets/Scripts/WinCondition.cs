@@ -9,7 +9,7 @@ public class WinCondition : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        GameData.Instance.AddCoins(CoinsManager.Instance.GetCoinsAmount());
+        GameData.Instance.AddCoins(CoinsManager.Instance.GetMaxCoinsAmount());
         AudioManager.Instance.PlayEffect("Win");
         SceneManager.LoadScene("WinScreen");
     }

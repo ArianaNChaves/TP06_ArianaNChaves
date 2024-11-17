@@ -19,7 +19,7 @@ public class FallDamage : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         AudioManager.Instance.PlayEffect("Lose");
-        GameData.Instance.AddCoins(CoinsManager.Instance.GetCoinsAmount());
+        GameData.Instance.AddCoins(CoinsManager.Instance.GetMaxCoinsAmount());
         SceneManager.LoadScene("LoseScreen");
     }
 }

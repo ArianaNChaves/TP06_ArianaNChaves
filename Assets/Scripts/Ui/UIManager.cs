@@ -1,3 +1,5 @@
+using TMPro;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,17 +15,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button settingsBackButton;
     [SerializeField] private Button creditsBackButton;
     [SerializeField] private Button sfxButton;
+    [SerializeField] private Button infoButton;
+    [SerializeField] private Button infoBackButton;
 
     [Header("Panels")] 
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject buttonsPanel;
+    [SerializeField] private GameObject infoPanel;
     
     [Header("Sliders")] 
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider sfxVolume;
     [SerializeField] private Slider globalVolume;
-
+    
+    [Header("Info")]
+    [SerializeField] private TextMeshProUGUI totalCoins;
+    [SerializeField] private TextMeshProUGUI totalTime;
     private void Awake()
     {
         playButton.onClick.AddListener(OnPlayButtonClicked);
@@ -33,6 +41,7 @@ public class UIManager : MonoBehaviour
         settingsBackButton.onClick.AddListener(OnSettingsBackButtonClicked);
         creditsBackButton.onClick.AddListener(OnCreditsBackButtonClicked);
         sfxButton.onClick.AddListener(OnSoundEffectsButtonClicked);
+        infoButton.onClick.AddListener(OnInfoButtonClicked);
         
         musicVolume.onValueChanged.AddListener(SetMusicVolume);
         sfxVolume.onValueChanged.AddListener(SetSFXVolume);
@@ -44,7 +53,7 @@ public class UIManager : MonoBehaviour
         AudioManager.Instance.PlayMusic("Menu");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        
+        LoadInfoPanel();
         AudioManager.Instance.MusicVolume(musicVolume.value);
         AudioManager.Instance.SfxVolume(sfxVolume.value);
         AudioManager.Instance.GlobalVolume(globalVolume.value);
@@ -59,13 +68,23 @@ public class UIManager : MonoBehaviour
         settingsBackButton.onClick.RemoveListener(OnSettingsBackButtonClicked);
         creditsBackButton.onClick.RemoveListener(OnSoundEffectsButtonClicked);
         sfxButton.onClick.RemoveListener(OnSoundEffectsButtonClicked);
-
+        infoButton.onClick.RemoveListener(OnInfoButtonClicked);
         
         musicVolume.onValueChanged.RemoveListener(SetMusicVolume);
         sfxVolume.onValueChanged.RemoveListener(SetSFXVolume);
         globalVolume.onValueChanged.RemoveListener(SetSFXVolume);
     }
 
+    private void LoadInfoPanel()
+    {
+        totalCoins.SetText(GameData.Instance.GetCoins().ToString());
+        totalTime.SetText(Mathf.Round(GameData.Instance.GetTime()).ToString() + " S");
+    }
+    private void OnInfoButtonClicked()
+    {
+        infoPanel.SetActive(!infoPanel.activeInHierarchy);
+        buttonsPanel.SetActive(!buttonsPanel.activeInHierarchy);
+    }
     private void OnPlayButtonClicked()
     {
         SceneManager.LoadScene("Gameplay");

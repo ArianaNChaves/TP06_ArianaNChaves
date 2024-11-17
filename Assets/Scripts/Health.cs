@@ -132,7 +132,7 @@ public class Health : MonoBehaviour, IHealthHandler
 
     private void Lose()
     {
-        GameData.Instance.AddCoins(CoinsManager.Instance.GetCoinsAmount());
+        GameData.Instance.AddCoins(CoinsManager.Instance.GetMaxCoinsAmount());
         SceneManager.LoadScene("LoseScreen");
     }
 }

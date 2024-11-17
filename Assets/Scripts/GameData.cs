@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,16 +16,13 @@ public class GameData : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            LoadData();
         }
         else
         {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-    }
-    private void Start()
-    {
-        LoadData();
     }
     
     private void Update()
@@ -56,6 +54,14 @@ public class GameData : MonoBehaviour
         Debug.Log($"Datos guardados: Tiempo jugado = {_timePlayed} segundos, Monedas totales = {_totalCoins}");
     }
 
+    public float GetTime()
+    {
+        return _timePlayed;
+    }
+    public float GetCoins()
+    {
+        return _totalCoins;
+    }
     public void AddCoins(int amount)
     {
         _totalCoins += amount;

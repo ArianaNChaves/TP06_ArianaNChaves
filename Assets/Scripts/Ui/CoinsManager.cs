@@ -11,6 +11,7 @@ public class CoinsManager : MonoBehaviour
     [SerializeField] private GameObject coinPrefab;
     
     private int _coinsAmount = 0;
+    private int _maxCoins = 0;
     
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class CoinsManager : MonoBehaviour
 
     private void Start()
     {
+        _maxCoins = 0;
         GameplayUi.Instance.UpdateCoinsText(_coinsAmount);
     }
 
@@ -33,12 +35,18 @@ public class CoinsManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         _coinsAmount += amount;
+        _maxCoins += amount;
         GameplayUi.Instance.UpdateCoinsText(_coinsAmount);
     }
 
     public int GetCoinsAmount()
     {
         return _coinsAmount;
+    }
+
+    public int GetMaxCoinsAmount()
+    {
+        return _maxCoins;
     }
 
     public void ExpendCoins(int amount)
