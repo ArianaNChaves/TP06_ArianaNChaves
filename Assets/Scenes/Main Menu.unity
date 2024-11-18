@@ -2055,10 +2055,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sound Effects\n\tFreesound.org\nMusic\n\tUltracombo - League of legends\n\tGame
-    Over - A Fool's Baby Bear\nAssets\n\tPlayer - Ariana Noelia Chaves\n\tBackground
-    - Itch.io\n\tEnemy - Kenney.nl\n\tMap - Kenney.nl\nDeveloper\n\tAriana Noelia
-    Chaves\n\t"
+  m_text: "Sound Effects\n\tFreesound.org\nMusic\n\tAnsimuz - Unity Asset Store\n\tAnsimuz
+    - Unity Asset Store\nAssets\n\tPlayer - Ansimuz\n\tBackground - Ansimuz\n\tEnemy
+    - Ansimuz\n\tMap - Ansimuz\nDeveloper\n\tAriana Noelia Chaves\n\t"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 20104a8876ac3a64280706a690e3dd99, type: 2}
   m_sharedMaterial: {fileID: -7173145232748031149, guid: 20104a8876ac3a64280706a690e3dd99, type: 2}
