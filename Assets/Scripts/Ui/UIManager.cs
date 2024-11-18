@@ -97,6 +97,7 @@ public class UIManager : MonoBehaviour
     private void OnExitButtonClicked()
     {
         Debug.Log("exit");
+        Application.Quit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
