@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
     private bool _isAttacking = false;
     private float _timer = 0;
     private IHealthHandler _healthHandler;
+    private Coroutine _currentCoroutine;
     public enum State
     {
         Patrol,
@@ -80,7 +81,7 @@ public class Enemy : MonoBehaviour
         
         if (Mathf.Abs(transform.position.x - targetX.x) < maxDistance && !_isWaiting)
         {
-            StartCoroutine(ChangeDirection());
+            StartChangeDirectionCoroutine();        
         }
     }
 
@@ -94,10 +95,20 @@ public class Enemy : MonoBehaviour
     {
         _rigidbody2D.velocity = Vector2.zero;
         _isWaiting = true;
-        yield return new WaitForSeconds(patrolWaitTime); 
+        yield return new WaitForSeconds(patrolWaitTime);
         _isMovingToB = !_isMovingToB;
         _isWaiting = false;
     }
+
+    private void StartChangeDirectionCoroutine()
+    {
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+        }
+        _currentCoroutine = StartCoroutine(ChangeDirection());
+    }
+
 
     private void InitiateCombat()
     {
@@ -146,6 +157,12 @@ public class Enemy : MonoBehaviour
     
     public void ChangingStateTo(State state)
     {
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+            _currentCoroutine = null;
+        }
+
         _isChangingState = true;
         _rigidbody2D.velocity = Vector2.zero;
         StopAllCoroutines();
@@ -154,5 +171,6 @@ public class Enemy : MonoBehaviour
         _isAttacking = false;
         _isChangingState = false;
     }
+
     
 }
