@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-        if (_isWaiting) return;
+        if (_isWaiting || _isAttacking) return;
         Vector2 targetX = new Vector2(_isMovingToB ? positionB.position.x : positionA.position.x, transform.position.y);
         MovingTo(targetX);
         
@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
     private void InitiateCombat()
     {
         if(!target) return;
-        if (transform.position.x >= positionA.position.x || transform.position.x <= positionB.position.x)
+        if (!ValidateAttack())
         {
             ChangingStateTo(State.Patrol);
             return;
@@ -133,6 +133,11 @@ public class Enemy : MonoBehaviour
             _timer = 0;
             _healthHandler.UpdateHealth(-entityData.Damage);
         }
+    }
+
+    private bool ValidateAttack()
+    {
+        return target.position.x < positionA.position.x && target.position.x > positionB.position.x;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -157,20 +162,24 @@ public class Enemy : MonoBehaviour
     
     public void ChangingStateTo(State state)
     {
+        if (_state == state) return;
+
         if (_currentCoroutine != null)
         {
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;
         }
 
+        StopAllCoroutines();
         _isChangingState = true;
         _rigidbody2D.velocity = Vector2.zero;
-        StopAllCoroutines();
-        _state = state;
         _isWaiting = false;
         _isAttacking = false;
+        _state = state;
         _isChangingState = false;
     }
-
+    
+    public State CurrentState => _state;
+    
     
 }
